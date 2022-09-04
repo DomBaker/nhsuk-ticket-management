@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h1>Register</h1>
+<form method="POST" action="{{ url_for('auth.register') }}">
+    <div class="nhsuk-form-group">
+        {{ form.csrf_token }}
+        {{ form.email.label(class_="nhsuk-label") }}
+        {{ form.email(class_="nhsuk-input") }}
+        {{ form.first_name.label(class_="nhsuk-label") }}
+        {{ form.first_name(class_="nhsuk-input") }}
+        {{ form.last_name.label(class_="nhsuk-label") }}
+        {{ form.last_name(class_="nhsuk-input") }}
+        {{ form.password.label(class_="nhsuk-label") }}
+        {{ form.password(class_="nhsuk-input") }}
+        {{ form.confirm.label(class_="nhsuk-label") }}
+        {{ form.confirm(class_="nhsuk-input") }}
+    </div>  
+    <input class="nhsuk-button" type="submit" value="Register">
+</form>
+
+{% endblock %}
