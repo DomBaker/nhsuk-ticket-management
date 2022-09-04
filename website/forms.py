@@ -1,8 +1,7 @@
 from unittest import TestCase
 from wsgiref.validate import validator
 from flask_wtf import FlaskForm
-from wtforms import (StringField, TextAreaField, IntegerField, BooleanField,
-                     RadioField, EmailField, PasswordField)
+from wtforms import (StringField, TextAreaField, SelectField, EmailField, PasswordField)
 from wtforms import validators 
 from wtforms.widgets import PasswordInput
 
@@ -23,3 +22,4 @@ class LoginForm(FlaskForm):
 class TicketForm(FlaskForm):
     title = StringField('Title', [validators.DataRequired()])
     description = TextAreaField('Description', [validators.DataRequired()])
+    area_of_business = SelectField('Area of Business', choices=[('HR','HR'),('dev','Development'),('del','Delivery'),('prod','Product'),('tech','Tech Support')], validate_choice=True)

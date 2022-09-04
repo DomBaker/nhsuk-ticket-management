@@ -19,8 +19,9 @@ def register():
         password = request.form.get('password')
         confirm = request.form.get('confirm')
 
-        current_user = User.query.filter_by(email=email).first()
-        if current_user:
+        user = User.query.filter_by(email=email).first()
+
+        if user:
             flash('This email is already in use, please login')
         elif first_name.isnumeric():
             flash('First name cannot be numeric', category='error')
@@ -29,14 +30,14 @@ def register():
         elif password != confirm:
             flash('Passwords do not match', category='error')
         else:
-            a_user = User(email=email, first_name=first_name, last_name=last_name, password=generate_password_hash(password, method='sha256'))
-            db.session.add(a_user)
+            user = User(email=email, first_name=first_name, last_name=last_name, password=generate_password_hash(password, method='sha256'))
+            db.session.add(user)
             db.session.commit()
-            login_user(current_user, remember=True)
+            login_user(user, remember=True)
             flash('Account Created')
             return redirect(url_for('views.home'))
 
-    return render_template('auth/register.html', form=form)
+    return render_template('auth/register.html', form=form, user=current_user)
 
 @auth.route('/login', methods=['GET', 'POST'])
 def login():
@@ -45,12 +46,12 @@ def login():
         email = request.form.get('email')
         password = request.form.get('password')
 
-        current_user = User.query.filter_by(email=email).first()
+        user = User.query.filter_by(email=email).first()
 
-        if current_user:
-            if check_password_hash(current_user.password, password):
+        if user:
+            if check_password_hash(user.password, password):
                 flash('Logged in Successfully', category='success')
-                login_user(current_user, remember=True)
+                login_user(user, remember=True)
                 return redirect(url_for('views.home'))
             else:
                 flash('The email or password is incorrect')
@@ -58,7 +59,7 @@ def login():
             flash('User does not exist, please sign up')
 
 
-    return render_template('auth/login.html', form=form)
+    return render_template('auth/login.html', form=form, user=current_user)
 
 @auth.route('/logout')
 @login_required

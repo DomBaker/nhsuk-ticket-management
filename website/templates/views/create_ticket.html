@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>Create Ticket</h1>
+
+<form method="POST" action="{{ url_for('views.create_ticket') }}">
+    <div class="nhsuk-form-group">
+        {{ form.csrf_token }} 
+        {{ form.title.label(class_="nhsuk-label") }}
+        {{ form.title(class_="nhsuk-input") }}
+
+        {{ form.description.label(class_="nhsuk-label") }}
+        {{ form.description(class_="nhsuk-textarea") }}
+        
+        {{ form.area_of_business.label(class_="nhsuk-label") }}
+        {{ form.area_of_business(class_="nhsuk-textarea") }} 
+    </div>  
+    <input class="nhsuk-button" type="submit" value="Create Ticket">
+</form>
+
+{% endblock %}

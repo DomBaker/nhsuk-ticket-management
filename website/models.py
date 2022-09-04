@@ -6,8 +6,10 @@ class Ticket(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(150))
     description = db.Column(db.String(1500))
+    area_of_business = db.Column(db.String(40))
     date = db.Column(db.DateTime(timezone=True), default=func.now())
     owner = db.Column(db.Integer, db.ForeignKey('user.id'))
+    
 
 class User(db.Model, UserMixin):
     id = db.Column(db.Integer, primary_key=True)
