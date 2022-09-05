@@ -5,6 +5,7 @@ from wtforms import (StringField, TextAreaField, SelectField, EmailField, Passwo
 from wtforms import validators 
 from wtforms.widgets import PasswordInput
 
+#This form can be reused for updating the profile
 class RegisterForm(FlaskForm):
     email = EmailField('Email Address')
     first_name = StringField('First name', [validators.DataRequired()])
