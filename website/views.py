@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, request, flash
+from flask import Blueprint, render_template, request, flash, redirect, url_for
 from flask_login import login_required, current_user
 from .models import Ticket
 from . import db 
@@ -28,14 +28,14 @@ def create_ticket():
         db.session.commit()
         flash('New ticket created')
 
+        return redirect(url_for('views.create_ticket'))
+
     return render_template('views/create_ticket.html', form=form)
 
 @views.route('/view_ticket', methods=['GET', 'POST'])
 @login_required
 def view_ticket():
-    
-
-    return render_template('views/view_ticket.html')
+    return render_template('views/view_ticket.html', user=current_user)
 
 @views.route('/profile')
 @login_required

@@ -23,4 +23,4 @@ class LoginForm(FlaskForm):
 class TicketForm(FlaskForm):
     title = StringField('Title', [validators.DataRequired()])
     description = TextAreaField('Description', [validators.DataRequired()])
-    area_of_business = SelectField('Area of Business', choices=[('HR','HR'),('dev','Development'),('del','Delivery'),('prod','Product'),('tech','Tech Support')], validate_choice=True)
+    area_of_business = SelectField('Area of Business', choices=[('HR','HR'),('Development','Development'),('Delivery','Delivery'),('Product','Product'),('Tech Support','Tech Support')], validate_choice=True)
