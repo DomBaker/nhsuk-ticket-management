@@ -45,27 +45,15 @@ def create_ticket():
 def view_ticket():
     return render_template("views/view_ticket.html", user=current_user)
 
-
-@views.route("/profile")
+@views.route("/admin_nav_page")
 @login_required
-def profile():
-    form = RegisterForm()
+def admin_nav_page():
+    return render_template("views/admin_nav_page.html")
 
-    if request.method == "POST":
-        email = request.form.get("email")
-        first_name = request.form.get("first_name")
-        last_name = request.form.get("last_name")
-        password = request.form.get("password")
-        confirm = request.form.get("confirm")
+@views.route("/admin_view_ticket", methods=["GET", "POST"])
+@login_required
+def admin_view_ticket():
+    if current_user.is_admin:
+        all_tickets = Ticket.query.all()
 
-        if password != confirm:
-            flash("Passwords do not match")
-
-    elif request.method == "GET":
-        form.email.data = current_user.email
-        form.first_name.data = current_user.first_name
-        form.last_name.data = current_user.last_name
-        
-
-
-    return render_template("user/profile.html", form=form)
+    return render_template("views/admin_view_ticket.html", tickets=all_tickets)

@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<table class="nhsuk-table">
+    <caption class="nhsuk-table__caption">All User Tickets</caption>
+    <thead role="rowgroup" class="nhsuk-table__head">
+      <tr role="row">
+        <th role="columnheader" class="" scope="col">
+          Title
+        </th>
+        <th role="columnheader" class="" scope="col">
+          Description
+        </th>
+        <th role="columnheader" class="" scope="col">
+          Area of Business
+        </th>
+        <th role="columnheader" class="" scope="col">
+          Date
+        </th>
+        <th role="columnheader" class="" scope="col">
+          Controls
+        </th>
+      </tr>
+    </thead>
+    <tbody class="nhsuk-table__body">
+    {% for ticket in tickets %}
+      <tr role="row" class="nhsuk-table__row">
+        <td class="nhsuk-table__cell">{{ ticket.title }}</td>
+        <td class="nhsuk-table__cell">{{ ticket.description }}</td>
+        <td class="nhsuk-table__cell">{{ ticket.area_of_business }}</td>
+        <td class="nhsuk-table__cell">{{ ticket.date }}</td>
+      </tr>
+    {% endfor %}
+    </tbody>
+  </table>
+
+{% endblock %}

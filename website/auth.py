@@ -66,6 +66,31 @@ def login():
     return render_template("auth/login.html", form=form, user=current_user)
 
 
+@auth.route("/profile")
+@login_required
+def profile():
+    form = RegisterForm()
+
+    if request.method == "POST":
+        email = request.form.get("email")
+        first_name = request.form.get("first_name")
+        last_name = request.form.get("last_name")
+        password = request.form.get("password")
+        confirm = request.form.get("confirm")
+
+        if password != confirm:
+            flash("Passwords do not match")
+
+    elif request.method == "GET":
+        form.email.data = current_user.email
+        form.first_name.data = current_user.first_name
+        form.last_name.data = current_user.last_name
+        
+
+
+    return render_template("user/profile.html", form=form)
+
+
 @auth.route("/logout")
 @login_required
 def logout():

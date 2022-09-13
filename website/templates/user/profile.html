@@ -3,7 +3,7 @@
 {% block content %}
 
 <h1>Profile</h1>
-<form method="POST" action="{{ url_for('views.profile') }}">
+<form method="POST" action="{{ url_for('auth.profile') }}">
     <div class="nhsuk-form-group">
         {{ form.csrf_token }}
         {{ form.email.label(class_="nhsuk-label") }}
