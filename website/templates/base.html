@@ -3,6 +3,7 @@
 <head>
 <title>{% block title %}Home{% endblock %}</title>
 <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='styles.css') }}">
+<link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='bootstrap.min.css') }}">
 </head>
 <body>
     <header class="nhsuk-header" role="banner">
@@ -117,13 +118,25 @@
 
 </header>
 
-    {% with messages = get_flashed_messages() %}
+    {% with messages = get_flashed_messages(with_categories=true) %}
       {% if messages %}
-        <ul class=flashes>
-          {% for message in messages %}
-            <li>{{ message }}</li>
+          {% for category, message in messages %}
+          {% if category == 'error' %}
+          <div class="alert alert-danger alert-dismissable fade show" role="alert">
+            {{ message }}
+            <button type="button" class="close" data-dismiss="alert">
+              <span aria-hidden="true">&times;</span>
+            </button>
+            </div>
+            {% else %}
+            <div class="alert alert-success alert-dismissable fade show" role="alert">
+              {{ message }}
+              <button type="button" class="close" data-dismiss="alert">
+                <span aria-hidden="true">&times;</span>
+              </button>
+              </div>
+              {% endif %}
           {% endfor %}
-        </ul>
       {% endif %}
     {% endwith %}
 
@@ -154,5 +167,6 @@
 </body>
 
 <script type="text/javascript" src="/static/scripts.js"></script>
+<script type="text/javascript" src="/static/bootstrap.min.js"></script>
 
 </html>
