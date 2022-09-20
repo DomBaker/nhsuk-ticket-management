@@ -23,7 +23,7 @@ def create_app():
     app.register_blueprint(auth, url_prefix="/")
 
     # this makes sure that the model is pulled in before the db is created
-    from .models import User, Ticket
+    from .models import User
 
     create_database(app)
 

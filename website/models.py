@@ -20,6 +20,3 @@ class User(db.Model, UserMixin):
     password = db.Column(db.String(150))
     is_admin = db.Column(db.Boolean, default=False)
     tickets = db.relationship("Ticket")
-
-
-

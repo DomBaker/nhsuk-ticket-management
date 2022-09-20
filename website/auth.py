@@ -80,13 +80,11 @@ def profile():
 
         if password != confirm:
             flash("Passwords do not match")
-
+        
     elif request.method == "GET":
         form.email.data = current_user.email
         form.first_name.data = current_user.first_name
         form.last_name.data = current_user.last_name
-        
-
 
     return render_template("user/profile.html", form=form)
 

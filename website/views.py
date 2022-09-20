@@ -3,7 +3,7 @@ from flask_login import login_required, current_user
 from .models import Ticket
 from . import db
 
-from website.forms import TicketForm, RegisterForm
+from website.forms import TicketForm
 
 
 views = Blueprint("views", __name__)
@@ -45,10 +45,12 @@ def create_ticket():
 def view_ticket():
     return render_template("views/view_ticket.html", user=current_user)
 
+
 @views.route("/admin_nav_page")
 @login_required
 def admin_nav_page():
     return render_template("views/admin_nav_page.html")
+
 
 @views.route("/admin_view_ticket", methods=["GET", "POST"])
 @login_required
