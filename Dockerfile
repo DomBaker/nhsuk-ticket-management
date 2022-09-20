@@ -8,7 +8,8 @@ COPY . .
 
 RUN pip install pipenv
 RUN pipenv install
-RUN
+RUN pipenv shell
+
 ENV PORT=$port
 
 EXPOSE $PORT
