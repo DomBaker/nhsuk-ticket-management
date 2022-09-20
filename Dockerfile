@@ -7,14 +7,11 @@ WORKDIR /
 COPY . .
 
 RUN pip install pipenv
-RUN pipenv shell
 RUN pipenv install
+
 
 ENV PORT=$port
 
 EXPOSE $PORT
 
 CMD exec pipenv run start -h 0.0.0.0 -p $PORT
-
-
-
