@@ -6,12 +6,12 @@ ENV LC_ALL=C.UTF-8 \
 WORKDIR /
 COPY . .
 
-RUN pip install pipenv
-RUN pipenv install
+RUN python -m pip install --upgrade pip
+RUN pip install pipenv && pipenv install --dev --system --deploy
 
 
 ENV PORT=$port
 
 EXPOSE $PORT
 
-CMD exec pipenv run start -h 0.0.0.0 -p $PORT
+CMD exec python main.py
