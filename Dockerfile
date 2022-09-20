@@ -7,8 +7,8 @@ WORKDIR /
 COPY . .
 
 RUN pip install pipenv
-RUN pipenv install
 RUN pipenv shell
+RUN pipenv install
 
 ENV PORT=$port
 
