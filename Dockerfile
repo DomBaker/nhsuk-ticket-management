@@ -8,9 +8,12 @@ COPY . .
 
 RUN pip install pipenv
 RUN pipenv install
+RUN
 ENV PORT=$port
+
 EXPOSE $PORT
 
-CMD ["pipenv", "run", "start"]
+CMD exec pipenv run start -h 0.0.0.0 -p $PORT
+
 
 
