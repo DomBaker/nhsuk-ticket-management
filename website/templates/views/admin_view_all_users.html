@@ -25,12 +25,15 @@
     </thead>
     <tbody class="nhsuk-table__body">
     {% for user in users %}
+    {% if user.id != current_user.id %}
       <tr role="row" class="nhsuk-table__row">
         <td class="nhsuk-table__cell">{{ user.id }}</td>
         <td class="nhsuk-table__cell">{{ user.email }}</td>
         <td class="nhsuk-table__cell">{{ user.first_name }}</td>
         <td class="nhsuk-table__cell">{{ user.last_name }}</td>
+        <td class="nhsuk-table__cell "><a class="nhsuk-button nhsuk-button--secondary" href="">Delete</a></td>
       </tr>
+      {% endif %}
     {% endfor %}
     </tbody>
   </table>

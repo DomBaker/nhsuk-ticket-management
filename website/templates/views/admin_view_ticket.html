@@ -20,7 +20,10 @@
           Date
         </th>
         <th role="columnheader" class="" scope="col">
-          Controls
+          Complete
+        </th>
+        <th role="columnheader" class="" scope="col">
+          Delete
         </th>
       </tr>
     </thead>
@@ -31,6 +34,8 @@
         <td class="nhsuk-table__cell">{{ ticket.description }}</td>
         <td class="nhsuk-table__cell">{{ ticket.area_of_business }}</td>
         <td class="nhsuk-table__cell">{{ ticket.date }}</td>
+        <td class="nhsuk-table__cell "><a class="nhsuk-button nhsuk-button" href="">Complete</a></td>
+        <td class="nhsuk-table__cell "><a class="nhsuk-button nhsuk-button--secondary" href="">Delete</a></td>
       </tr>
     {% endfor %}
     </tbody>
