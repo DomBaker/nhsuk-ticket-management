@@ -1,6 +1,6 @@
 from flask import Blueprint, render_template, request, flash, redirect, url_for
 from flask_login import login_required, current_user
-from .models import Ticket
+from .models import Ticket, User
 from . import db
 
 from website.forms import TicketForm
@@ -59,3 +59,12 @@ def admin_view_ticket():
         all_tickets = Ticket.query.all()
 
     return render_template("views/admin_view_ticket.html", tickets=all_tickets)
+
+
+@views.route("/admin_view_users", methods=["GET", "POST"])
+@login_required
+def admin_view_users():
+    if current_user.is_admin:
+        all_users = User.query.all()
+
+    return render_template("views/admin_view_all_users.html", users=all_users)

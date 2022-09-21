@@ -66,25 +66,35 @@ def login():
     return render_template("auth/login.html", form=form, user=current_user)
 
 
-@auth.route("/profile")
+@auth.route("/profile/<int:id>")
 @login_required
-def profile():
+def profile(id):
     form = RegisterForm()
+    user = db.session.query(User).get_or_404(id)
 
-    if request.method == "POST":
-        email = request.form.get("email")
-        first_name = request.form.get("first_name")
-        last_name = request.form.get("last_name")
-        password = request.form.get("password")
-        confirm = request.form.get("confirm")
-
-        if password != confirm:
-            flash("Passwords do not match")
-        
-    elif request.method == "GET":
+    if request.method == "GET":
         form.email.data = current_user.email
         form.first_name.data = current_user.first_name
         form.last_name.data = current_user.last_name
+
+    elif request.method == "POST":
+        user.email = request.form.get("email")
+        user.first_name = request.form.get("first_name")
+        user.last_name = request.form.get("last_name")
+        user.password = request.form.get("password")
+        confirm = request.form.get("confirm")
+
+        if user.password != confirm:
+            flash("Passwords do not match")
+        else:
+            user.password = generate_password_hash(user.password, method="sha256")
+
+        try:
+            db.session.commit()
+            flash('User updated')
+            return redirect(url_for("auth.profile"), id=user.id)
+        except:
+            flash('User failed to update')
 
     return render_template("user/profile.html", form=form)
 

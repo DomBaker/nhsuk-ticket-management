@@ -1,23 +1,22 @@
 {% extends "base.html" %}
 
 {% block content %}
-
-<h1>All user tickets</h1>
+<h1>All Users</h1>
 
 <table class="nhsuk-table">
     <thead role="rowgroup" class="nhsuk-table__head">
       <tr role="row">
         <th role="columnheader" class="" scope="col">
-          Title
+          ID
         </th>
         <th role="columnheader" class="" scope="col">
-          Description
+          Email
         </th>
         <th role="columnheader" class="" scope="col">
-          Area of Business
+          First Name
         </th>
         <th role="columnheader" class="" scope="col">
-          Date
+          Last Name
         </th>
         <th role="columnheader" class="" scope="col">
           Controls
@@ -25,12 +24,12 @@
       </tr>
     </thead>
     <tbody class="nhsuk-table__body">
-    {% for ticket in tickets %}
+    {% for user in users %}
       <tr role="row" class="nhsuk-table__row">
-        <td class="nhsuk-table__cell">{{ ticket.title }}</td>
-        <td class="nhsuk-table__cell">{{ ticket.description }}</td>
-        <td class="nhsuk-table__cell">{{ ticket.area_of_business }}</td>
-        <td class="nhsuk-table__cell">{{ ticket.date }}</td>
+        <td class="nhsuk-table__cell">{{ user.id }}</td>
+        <td class="nhsuk-table__cell">{{ user.email }}</td>
+        <td class="nhsuk-table__cell">{{ user.first_name }}</td>
+        <td class="nhsuk-table__cell">{{ user.last_name }}</td>
       </tr>
     {% endfor %}
     </tbody>
