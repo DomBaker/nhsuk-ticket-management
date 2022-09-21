@@ -11,6 +11,7 @@ flask-wtf = "*"
 black = "*"
 flake8 = "*"
 pytest = "*"
+pre-commit = "*"
 
 [dev-packages]
 
