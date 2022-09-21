@@ -1,28 +1,14 @@
 import pytest
-from my_project import create_app
+from website.models import User, Ticket
+from werkzeug.security import generate_password_hash
 
 
-@pytest.fixture()
-def app():
-    app = create_app()
-    app.config.update(
-        {
-            "TESTING": True,
-        }
-    )
+@pytest.fixture(scope="module")
+def new_user():
+    user = User(email="test@test.com", first_name="afirstname", last_name="alastname", password=generate_password_hash("apassword"), is_admin=True)
+    return user
 
-    # other setup can go here
-
-    yield app
-
-    # clean up / reset resources here
-
-
-@pytest.fixture()
-def client(app):
-    return app.test_client()
-
-
-@pytest.fixture()
-def runner(app):
-    return app.test_cli_runner()
+@pytest.fixture(scope="module")
+def new_ticket():
+    ticket = Ticket(title="sometitle", description="somedescription", area_of_business="HR")
+    return ticket
