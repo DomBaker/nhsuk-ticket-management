@@ -66,7 +66,7 @@ def login():
     return render_template("auth/login.html", form=form, user=current_user)
 
 
-@auth.route("/profile/<int:id>", methods=['GET', 'POST'])
+@auth.route("/profile/<int:id>", methods=["GET", "POST"])
 @login_required
 def profile(id):
     form = RegisterForm()
@@ -91,10 +91,10 @@ def profile(id):
 
         try:
             db.session.commit()
-            flash('User updated')
+            flash("User updated")
             return render_template("user/profile.html", form=form, id=user.id)
-        except:
-            flash('User failed to update')
+        except BaseException:
+            flash("User failed to update")
             return redirect(url_for("auth.profile"))
 
     return render_template("user/profile.html", form=form)
