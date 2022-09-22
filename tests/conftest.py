@@ -26,15 +26,15 @@ def new_ticket():
     return ticket
 
 
-@pytest.fixture
-def client():
-    db_fd, website.app.config["DATABASE"] = tempfile.mkstemp()
-    website.app.config["TESTING"] = True
+# @pytest.fixture
+# def client():
+#     db_fd, website.app.config["DATABASE"] = tempfile.mkstemp()
+#     website.app.config["TESTING"] = True
 
-    with website.app.test_client() as client:
-        with website.app.app_context():
-            website.init_db()
-        yield client
+#     with website.app.test_client() as client:
+#         with website.app.app_context():
+#             website.init_db()
+#         yield client
 
-    os.close(db_fd)
-    os.unlink(website.app.config["DATABASE"])
+#     os.close(db_fd)
+#     os.unlink(website.app.config["DATABASE"])
