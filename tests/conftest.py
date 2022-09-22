@@ -1,7 +1,5 @@
 import pytest
-import os
-import tempfile
-import website
+
 from website.models import User, Ticket
 from werkzeug.security import generate_password_hash
 
