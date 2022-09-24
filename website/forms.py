@@ -21,12 +21,18 @@ class RegisterForm(FlaskForm):
 
 class LoginForm(FlaskForm):
     email = EmailField("Email Address")
-    password = PasswordField("Password", [validators.DataRequired(), validators.Length(min=8, max=100)])
+    password = PasswordField(
+        "Password", [validators.DataRequired(), validators.Length(min=8, max=100)]
+    )
 
 
 class TicketForm(FlaskForm):
-    title = StringField("Title", [validators.DataRequired(), validators.Length(min=5, max=100)])
-    description = TextAreaField("Description", [validators.DataRequired(), validators.Length(min=10, max=1500)])
+    title = StringField(
+        "Title", [validators.DataRequired(), validators.Length(min=5, max=100)]
+    )
+    description = TextAreaField(
+        "Description", [validators.DataRequired(), validators.Length(min=10, max=1500)]
+    )
     area_of_business = SelectField(
         "Area of Business",
         choices=[

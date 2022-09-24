@@ -53,6 +53,7 @@ Also feel free to create your own standard user.
 - ``` pipenv install ``` to install the included pipfile.lock
 - ``` python main.py ``` will run the application from the main.py this is because the website itself is a module
 - ``` 127.0.0.1:5000 or localhost:5000``` use one of these urls to view the project in your browser
+- ``` exit ``` will close the virtual env once finished
 
 ## DB connection 
 The database is stored within the project repository, this isn't ideal for a production environment but for the purpose of the assignment is acceptable
