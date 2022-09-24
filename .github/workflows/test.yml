@@ -29,6 +29,9 @@ jobs:
       - name: Test with pytest
         run: |
           python -m pytest
+      - name: Coverage test percentage
+        run: |
+          python -m pytest --cov-report term --cov=website .
 
       - name: OWASP CHECK
         uses: zaproxy/action-baseline@v0.7.0

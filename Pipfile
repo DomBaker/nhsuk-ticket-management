@@ -11,6 +11,10 @@ flask-wtf = "*"
 black = "*"
 flake8 = "*"
 pytest = "*"
+coverage = "*"
+pytest-cov = "*"
+flask-testing = "*"
+bs4 = "*"
 
 [dev-packages]
 
