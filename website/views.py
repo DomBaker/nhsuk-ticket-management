@@ -55,7 +55,7 @@ def admin_nav_page():
 @views.route("/admin_view_ticket", methods=["GET", "POST"])
 @login_required
 def admin_view_ticket():
-    if current_user.is_admin:
+    if current_user.is_authenticated and current_user.is_admin:
         all_tickets = Ticket.query.all()
 
     return render_template("views/admin_view_ticket.html", tickets=all_tickets)
@@ -64,7 +64,23 @@ def admin_view_ticket():
 @views.route("/admin_view_users", methods=["GET", "POST"])
 @login_required
 def admin_view_users():
-    if current_user.is_admin:
+    if current_user.is_authenticated and current_user.is_admin:
         all_users = User.query.all()
 
     return render_template("views/admin_view_all_users.html", users=all_users)
+
+
+@views.route("/delete_ticket/<int:id>", methods=["GET", "POST"])
+@login_required
+def delete_ticket(id):
+    ticket_to_delete = db.session.query(Ticket).get_or_404(id)
+
+    try:
+        db.session.delete(ticket_to_delete)
+        db.session.commit()
+        flash("Ticket deleted")
+
+    except BaseException:
+        flash("Unable to delete ticket at this time")
+
+    return render_template("views/view_ticket.html", user=current_user)

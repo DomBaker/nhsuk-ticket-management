@@ -72,12 +72,12 @@ def profile(id):
     form = RegisterForm()
     user = db.session.query(User).get_or_404(id)
 
-    if request.method == "GET":
+    if current_user.is_authenticated and request.method == "GET":
         form.email.data = current_user.email
         form.first_name.data = current_user.first_name
         form.last_name.data = current_user.last_name
 
-    elif request.method == "POST":
+    elif current_user.is_authenticated and request.method == "POST":
         user.email = request.form.get("email")
         user.first_name = request.form.get("first_name")
         user.last_name = request.form.get("last_name")
