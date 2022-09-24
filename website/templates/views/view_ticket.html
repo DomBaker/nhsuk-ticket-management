@@ -20,6 +20,9 @@
           Date
         </th>
         <th role="columnheader" class="" scope="col">
+          Complete
+        </th>
+        <th role="columnheader" class="" scope="col">
           Delete
         </th>
       </tr>
@@ -31,6 +34,7 @@
         <td class="nhsuk-table__cell">{{ ticket.description }}</td>
         <td class="nhsuk-table__cell">{{ ticket.area_of_business }}</td>
         <td class="nhsuk-table__cell">{{ ticket.date }}</td>
+        <td class="nhsuk-table__cell">{{ ticket.complete }}</td>
         <td class="nhsuk-table__cell "><a class="nhsuk-button nhsuk-button--secondary" href="/delete_ticket/{{ ticket.id }}">Delete</a></td>
       </tr>
     {% endfor %}

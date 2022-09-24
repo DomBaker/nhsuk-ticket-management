@@ -9,6 +9,7 @@ class Ticket(db.Model):
     description = db.Column(db.String(1500))
     area_of_business = db.Column(db.String(40))
     date = db.Column(db.DateTime(timezone=True), default=func.now())
+    complete = db.Column(db.Boolean, default=False)
     owner = db.Column(db.Integer, db.ForeignKey("user.id"))
 
 

@@ -34,8 +34,13 @@
         <td class="nhsuk-table__cell">{{ ticket.description }}</td>
         <td class="nhsuk-table__cell">{{ ticket.area_of_business }}</td>
         <td class="nhsuk-table__cell">{{ ticket.date }}</td>
-        <td class="nhsuk-table__cell "><a class="nhsuk-button nhsuk-button" href="">Complete</a></td>
-        <td class="nhsuk-table__cell "><a class="nhsuk-button nhsuk-button--secondary" href="">Delete</a></td>
+        {% if ticket.complete != True %}
+        <td class="nhsuk-table__cell "><a class="nhsuk-button nhsuk-button" href="/complete_ticket/{{ ticket.id }}">Complete</a></td>
+        {% endif %}
+        {% if ticket.complete != False %}
+        <td class="nhsuk-table__cell "></td>
+        {% endif %}
+        <td class="nhsuk-table__cell "><a class="nhsuk-button nhsuk-button--secondary" href="/admin_delete_ticket/{{ ticket.id }}">Delete</a></td>
       </tr>
     {% endfor %}
     </tbody>

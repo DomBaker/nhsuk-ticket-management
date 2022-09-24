@@ -84,3 +84,44 @@ def delete_ticket(id):
         flash("Unable to delete ticket at this time")
 
     return render_template("views/view_ticket.html", user=current_user)
+
+
+@views.route("/complete_ticket/<int:id>", methods=["GET", "POST"])
+@login_required
+def complete_ticket(id):
+    ticket_to_complete = db.session.query(Ticket).get_or_404(id)
+
+    ticket_to_complete.complete = True
+
+    try:
+        db.session.commit()
+        flash("Marked as complete")
+        return redirect(
+            url_for(
+                "views.admin_view_ticket", id=id, ticket_to_complete=ticket_to_complete
+            )
+        )
+
+    except BaseException:
+        flash("Unable to complete ticket")
+
+    return redirect(url_for("views.admin_view_ticket"))
+
+
+@views.route("/admin_delete_ticket/<int:id>", methods=["GET", "POST"])
+@login_required
+def admin_delete_ticket(id):
+    ticket_to_delete = db.session.query(Ticket).get_or_404(id)
+
+    try:
+        db.session.delete(ticket_to_delete)
+        db.session.commit()
+        flash("Ticket deleted by an admin")
+        return redirect(
+            url_for("views.admin_view_ticket", id=id, ticket_to_delete=ticket_to_delete)
+        )
+
+    except BaseException:
+        flash("Unable to complete ticket")
+
+    return redirect(url_for("views.admin_view_ticket"))
