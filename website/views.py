@@ -69,6 +69,7 @@ def admin_view_users():
 
     return render_template("views/admin_view_all_users.html", users=all_users)
 
+
 @views.route("/admin_delete_user/<int:id>", methods=["GET", "POST"])
 @login_required
 def admin_delete_user(id):
@@ -78,9 +79,7 @@ def admin_delete_user(id):
         db.session.delete(user)
         db.session.commit()
         flash("User deleted by an admin")
-        return redirect(
-            url_for("views.admin_view_users", id=id, user=user)
-        )
+        return redirect(url_for("views.admin_view_users", id=id, user=user))
 
     except BaseException:
         flash("Unable to delete user")
