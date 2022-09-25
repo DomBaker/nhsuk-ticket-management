@@ -10,7 +10,6 @@ views = Blueprint("views", __name__)
 
 
 @views.route("/")
-@login_required
 def home():
     return render_template("views/home.html")
 
@@ -20,7 +19,7 @@ def home():
 def create_ticket():
     form = TicketForm()
 
-    if request.method == "POST":
+    if current_user.is_authenticated and request.method == "POST":
         title = request.form.get("title")
         description = request.form.get("description")
         area_of_business = request.form.get("area_of_business")
@@ -43,13 +42,21 @@ def create_ticket():
 @views.route("/view_ticket", methods=["GET", "POST"])
 @login_required
 def view_ticket():
-    return render_template("views/view_ticket.html", user=current_user)
+    if current_user.is_authenticated:
+        return render_template("views/view_ticket.html", user=current_user)
+    else:
+        flash("You aren't allowed to access that page")
+        return redirect(url_for("views.home"))
 
 
 @views.route("/admin_nav_page")
 @login_required
 def admin_nav_page():
-    return render_template("views/admin_nav_page.html")
+    if current_user.is_authenticated and current_user.is_admin:
+        return render_template("views/admin_nav_page.html")
+    else:
+        flash("You aren't allowed to access that page")
+        return redirect(url_for("views.home"))
 
 
 @views.route("/admin_view_ticket", methods=["GET", "POST"])
@@ -57,8 +64,10 @@ def admin_nav_page():
 def admin_view_ticket():
     if current_user.is_authenticated and current_user.is_admin:
         all_tickets = Ticket.query.all()
-
-    return render_template("views/admin_view_ticket.html", tickets=all_tickets)
+        return render_template("views/admin_view_ticket.html", tickets=all_tickets)
+    else:
+        flash("You aren't allowed to access that page")
+        return redirect(url_for("views.home"))
 
 
 @views.route("/admin_view_users", methods=["GET", "POST"])
@@ -66,8 +75,10 @@ def admin_view_ticket():
 def admin_view_users():
     if current_user.is_authenticated and current_user.is_admin:
         all_users = User.query.all()
-
-    return render_template("views/admin_view_all_users.html", users=all_users)
+        return render_template("views/admin_view_all_users.html", users=all_users)
+    else:
+        flash("You aren't allowed to access that page")
+        return redirect(url_for("views.home"))
 
 
 @views.route("/admin_delete_user/<int:id>", methods=["GET", "POST"])
