@@ -38,7 +38,7 @@ class TestResponse(TestApp):
     # Page returns 302 as login is required
     def test_home_response(self):
         response = self.client.get(url_for("views.home"))
-        self.assertEqual(response.status_code, 302)
+        self.assertEqual(response.status_code, 200)
 
     def test_create_ticket_response(self):
         response = self.client.get(url_for("views.create_ticket"))
