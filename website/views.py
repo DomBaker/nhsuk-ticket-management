@@ -86,14 +86,15 @@ def admin_view_users():
 def admin_delete_user(id):
     user = db.session.query(User).get_or_404(id)
 
-    try:
-        db.session.delete(user)
-        db.session.commit()
-        flash("User deleted by an admin")
-        return redirect(url_for("views.admin_view_users", id=id, user=user))
+    if current_user.is_authenticated and current_user.is_admin:
+        try:
+            db.session.delete(user)
+            db.session.commit()
+            flash("User deleted by an admin")
+            return redirect(url_for("views.admin_view_users", id=id, user=user))
 
-    except BaseException:
-        flash("Unable to delete user")
+        except BaseException:
+            flash("Unable to delete user")
 
     return redirect(url_for("views.admin_view_users"))
 
